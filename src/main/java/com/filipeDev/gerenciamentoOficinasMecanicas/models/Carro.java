@@ -1,4 +1,4 @@
-package models;
+package com.filipeDev.gerenciamentoOficinasMecanicas.models;
 
 import java.util.List;
 
@@ -23,8 +23,7 @@ public class Carro {
 	@Enumerated(EnumType.STRING) // importante p/ salvar como texto no banco
 	private Cor cor; 
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "montadora_id")
+	@Enumerated(EnumType.STRING)
 	private Montadora montadora;
 
 
@@ -36,7 +35,7 @@ public class Carro {
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 	
-	@OneToMany(mappedBy = "carro")
+	@OneToMany(mappedBy = "carro", fetch = FetchType.LAZY)
 	private List<OrdemDeServico> ordens;
 
 	public Long getId() {
@@ -111,10 +110,9 @@ public class Carro {
 		this.ordens = ordens;
 	}
 
-	public Carro(Long id, String placa, Cor cor, Montadora montadora, String modelo, String frota, String observacoes,
-			Cliente cliente, List<OrdemDeServico> ordens) {
+	public Carro(String placa, Cor cor, Montadora montadora, String modelo, String frota, String observacoes,
+			Cliente cliente) {
 		super();
-		this.id = id;
 		this.placa = placa;
 		this.cor = cor;
 		this.montadora = montadora;
@@ -122,7 +120,6 @@ public class Carro {
 		this.frota = frota;
 		this.observacoes = observacoes;
 		this.cliente = cliente;
-		this.ordens = ordens;
 	}
 	
 	public Carro() {}

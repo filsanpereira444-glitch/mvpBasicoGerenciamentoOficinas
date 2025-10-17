@@ -1,4 +1,4 @@
-package models;
+package com.filipeDev.gerenciamentoOficinasMecanicas.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -61,9 +61,8 @@ public class Servico {
 		this.tipoServico = tipoServico;
 	}
 
-	public Servico(Long id, String nome, String descricao, Double preco, TipoDeServico tipoServico) {
+	public Servico(String nome, String descricao, Double preco, TipoDeServico tipoServico) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.preco = preco;

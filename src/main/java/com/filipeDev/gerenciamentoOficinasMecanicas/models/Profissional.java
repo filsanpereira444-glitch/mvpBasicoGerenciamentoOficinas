@@ -1,8 +1,9 @@
-package models;
+package com.filipeDev.gerenciamentoOficinasMecanicas.models;
 
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,10 +19,11 @@ public class Profissional {
     private String nome;
     private String telefone;
     private String email;
+    
 
     private String observacoes; 
     
-    @OneToMany(mappedBy = "profissional")
+    @OneToMany(mappedBy = "profissional", fetch = FetchType.LAZY)
     private List<OsItem> itens;
 
 	public Long getId() {
@@ -72,14 +74,12 @@ public class Profissional {
 		this.itens = itens;
 	}
 
-	public Profissional(Long id, String nome, String telefone, String email, String observacoes, List<OsItem> itens) {
+	public Profissional(String nome, String telefone, String email, String observacoes) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
 		this.observacoes = observacoes;
-		this.itens = itens;
 	}
 
 	public Profissional() {}

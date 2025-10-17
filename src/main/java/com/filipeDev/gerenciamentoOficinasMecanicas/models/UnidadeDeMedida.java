@@ -1,4 +1,4 @@
-package models;
+package com.filipeDev.gerenciamentoOficinasMecanicas.models;
 
 public enum UnidadeDeMedida {
 	UN, // Unidade

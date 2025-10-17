@@ -1,4 +1,4 @@
-package models;
+package com.filipeDev.gerenciamentoOficinasMecanicas.models;
 
 import java.util.List;
 
@@ -21,11 +21,11 @@ public class OrdemDeServico {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "carro_id")
     private Carro carro;
 
@@ -38,7 +38,7 @@ public class OrdemDeServico {
     private List<OsItem> itens;
 
     
-    @ManyToMany(mappedBy = "ordensDeServico")
+    @ManyToMany(mappedBy = "ordensDeServico", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Pagamento> pagamentos;
 
 

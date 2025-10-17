@@ -1,4 +1,4 @@
-package models;
+package com.filipeDev.gerenciamentoOficinasMecanicas.models;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -6,6 +6,7 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,7 +29,7 @@ public class Pagamento {
     private BigDecimal valorTotal;
 
     // Relacionamento com Notas de Serviço (uma nota pode ser paga junto com outras)
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
       name = "pagamento_ordem_servico",
       joinColumns = @JoinColumn(name = "pagamento_id"),
@@ -39,7 +40,7 @@ public class Pagamento {
 
 
     // Um pagamento pode ter várias formas de pagamento
-    @OneToMany(mappedBy = "pagamento", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "pagamento", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<PagamentoForma> pagamentoForma;
 
 

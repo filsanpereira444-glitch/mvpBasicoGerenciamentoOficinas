@@ -1,10 +1,11 @@
-package models;
+package com.filipeDev.gerenciamentoOficinasMecanicas.models;
 
 import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,10 +26,10 @@ public class Cliente {
     @Enumerated(EnumType.STRING)
     private StatusCliente statuscliente;
     
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     private List<Carro> carros;
     
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     private List<OrdemDeServico> ordens;
 
 	public Long getId() {
@@ -103,18 +104,15 @@ public class Cliente {
 		this.ordens = ordens;
 	}
 
-	public Cliente(Long id, String nome, String telefone, String email, String cpfCnpj, String endereco,
-			StatusCliente statuscliente, List<Carro> carros, List<OrdemDeServico> ordens) {
+	public Cliente(String nome, String telefone, String email, String cpfCnpj, String endereco,
+			StatusCliente statuscliente) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
 		this.cpfCnpj = cpfCnpj;
 		this.endereco = endereco;
 		this.statuscliente = statuscliente;
-		this.carros = carros;
-		this.ordens = ordens;
 	}
 
 	public Cliente() {}

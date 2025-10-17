@@ -1,4 +1,4 @@
-package models;
+package com.filipeDev.gerenciamentoOficinasMecanicas.models;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
@@ -20,12 +20,12 @@ public class OsItem {
     private BigDecimal valorTotal;
 
     // Cada item pertence a uma OS
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ordem_servico_id")
     private OrdemDeServico ordemDeServico;
 
     // Um profissional pode executar vários itens
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profissional_id")
     private Profissional profissional;
 
@@ -34,10 +34,11 @@ public class OsItem {
     @Column(name = "tipo_item")
     private TipoItem tipoItem;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "produto_id", nullable = true)
     private Produto produto;
-    @ManyToOne
+    
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "servico_id", nullable = true)
     private Servico servico;
 	public Long getId() {

@@ -1,4 +1,4 @@
-package models;
+package com.filipeDev.gerenciamentoOficinasMecanicas.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -82,10 +82,9 @@ public class Produto {
 		this.unidadeDeMedida = unidadeDeMedida;
 	}
 
-	public Produto(Long id, String nome, String descricao, Double precoUnitario, Integer quantidadeEstoque,
+	public Produto(String nome, String descricao, Double precoUnitario, Integer quantidadeEstoque,
 			String codigo, UnidadeDeMedida unidadeDeMedida) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.precoUnitario = precoUnitario;
