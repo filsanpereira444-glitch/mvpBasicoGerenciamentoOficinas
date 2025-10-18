@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -28,21 +29,9 @@ public class Pagamento {
 
     private BigDecimal valorTotal;
 
-    // Relacionamento com Notas de Serviço (uma nota pode ser paga junto com outras)
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-      name = "pagamento_ordem_servico",
-      joinColumns = @JoinColumn(name = "pagamento_id"),
-      inverseJoinColumns = @JoinColumn(name = "ordem_servico_id")
-    )
-    private List<OrdemDeServico> ordensDeServico;
-
-
-
-    // Um pagamento pode ter várias formas de pagamento
-    @OneToMany(mappedBy = "pagamento", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<PagamentoForma> pagamentoForma;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fatura_id")
+    private Fatura fatura;
 
 
 	public Long getId() {
@@ -69,30 +58,12 @@ public class Pagamento {
 		this.valorTotal = valorTotal;
 	}
 
-	public List<OrdemDeServico> getOrdensDeServico() {
-		return ordensDeServico;
-	}
-
-	public void setOrdensDeServico(List<OrdemDeServico> ordensDeServico) {
-		this.ordensDeServico = ordensDeServico;
-	}
-
-	public List<PagamentoForma> getPagamentoForma() {
-		return pagamentoForma;
-	}
-
-	public void setPagamentoForma(List<PagamentoForma> pagamentoForma) {
-		this.pagamentoForma = pagamentoForma;
-	}
-
-	public Pagamento(Long id, LocalDateTime dataPagamento, BigDecimal valorTotal, List<OrdemDeServico> ordensDeServico,
-			List<PagamentoForma> pagamentoForma) {
+	public Pagamento(Long id, LocalDateTime dataPagamento, BigDecimal valorTotal) {
 		super();
 		this.id = id;
 		this.dataPagamento = dataPagamento;
 		this.valorTotal = valorTotal;
-		this.ordensDeServico = ordensDeServico;
-		this.pagamentoForma = pagamentoForma;
+		
 	}
 
 	public Pagamento() {}

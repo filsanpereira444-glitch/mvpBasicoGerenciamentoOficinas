@@ -20,23 +20,21 @@ public class Carro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String placa;
-	@Enumerated(EnumType.STRING) // importante p/ salvar como texto no banco
+	
+	@Enumerated(EnumType.STRING) 
 	private Cor cor; 
 	
 	@Enumerated(EnumType.STRING)
 	private Montadora montadora;
 
 
-	private String modelo; // aqui você pega da lista da montadora
+	private String modelo; 
 	private String frota;
 	private String observacoes;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
-	
-	@OneToMany(mappedBy = "carro", fetch = FetchType.LAZY)
-	private List<OrdemDeServico> ordens;
 
 	public Long getId() {
 		return id;
@@ -100,14 +98,6 @@ public class Carro {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
-	}
-
-	public List<OrdemDeServico> getOrdens() {
-		return ordens;
-	}
-
-	public void setOrdens(List<OrdemDeServico> ordens) {
-		this.ordens = ordens;
 	}
 
 	public Carro(String placa, Cor cor, Montadora montadora, String modelo, String frota, String observacoes,

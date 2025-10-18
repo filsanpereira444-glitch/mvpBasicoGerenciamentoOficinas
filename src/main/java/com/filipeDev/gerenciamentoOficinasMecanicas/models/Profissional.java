@@ -22,9 +22,6 @@ public class Profissional {
     
 
     private String observacoes; 
-    
-    @OneToMany(mappedBy = "profissional", fetch = FetchType.LAZY)
-    private List<OsItem> itens;
 
 	public Long getId() {
 		return id;
@@ -66,13 +63,6 @@ public class Profissional {
 		this.observacoes = observacoes;
 	}
 
-	public List<OsItem> getItens() {
-		return itens;
-	}
-
-	public void setItens(List<OsItem> itens) {
-		this.itens = itens;
-	}
 
 	public Profissional(String nome, String telefone, String email, String observacoes) {
 		super();

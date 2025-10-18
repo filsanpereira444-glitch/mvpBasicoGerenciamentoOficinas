@@ -24,23 +24,11 @@ public class OsItem {
     @JoinColumn(name = "ordem_servico_id")
     private OrdemDeServico ordemDeServico;
 
-    // Um profissional pode executar vários itens
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "profissional_id")
-    private Profissional profissional;
-
     // Identifica se é um produto ou um serviço
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_item")
     private TipoItem tipoItem;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "produto_id", nullable = true)
-    private Produto produto;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "servico_id", nullable = true)
-    private Servico servico;
 	public Long getId() {
 		return id;
 	}
@@ -77,33 +65,16 @@ public class OsItem {
 	public void setOrdemDeServico(OrdemDeServico ordemDeServico) {
 		this.ordemDeServico = ordemDeServico;
 	}
-	public Profissional getProfissional() {
-		return profissional;
-	}
-	public void setProfissional(Profissional profissional) {
-		this.profissional = profissional;
-	}
+	
 	public TipoItem getTipoItem() {
 		return tipoItem;
 	}
 	public void setTipoItem(TipoItem tipoItem) {
 		this.tipoItem = tipoItem;
 	}
-	public Produto getProduto() {
-		return produto;
-	}
-	public void setProduto(Produto produto) {
-		this.produto = produto;
-	}
-	public Servico getServico() {
-		return servico;
-	}
-	public void setServico(Servico servico) {
-		this.servico = servico;
-	}
+	
 	public OsItem(Long id, String descricao, Integer quantidade, BigDecimal valorUnitario, BigDecimal valorTotal,
-			OrdemDeServico ordemDeServico, Profissional profissional, TipoItem tipoItem, Produto produto,
-			Servico servico) {
+			OrdemDeServico ordemDeServico, TipoItem tipoItem) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
@@ -111,10 +82,7 @@ public class OsItem {
 		this.valorUnitario = valorUnitario;
 		this.valorTotal = valorTotal;
 		this.ordemDeServico = ordemDeServico;
-		this.profissional = profissional;
 		this.tipoItem = tipoItem;
-		this.produto = produto;
-		this.servico = servico;
 	}
 	public OsItem() {}
 

@@ -25,12 +25,6 @@ public class Cliente {
     
     @Enumerated(EnumType.STRING)
     private StatusCliente statuscliente;
-    
-    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
-    private List<Carro> carros;
-    
-    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
-    private List<OrdemDeServico> ordens;
 
 	public Long getId() {
 		return id;
@@ -88,21 +82,6 @@ public class Cliente {
 		this.statuscliente = statuscliente;
 	}
 
-	public List<Carro> getCarros() {
-		return carros;
-	}
-
-	public void setCarros(List<Carro> carros) {
-		this.carros = carros;
-	}
-
-	public List<OrdemDeServico> getOrdens() {
-		return ordens;
-	}
-
-	public void setOrdens(List<OrdemDeServico> ordens) {
-		this.ordens = ordens;
-	}
 
 	public Cliente(String nome, String telefone, String email, String cpfCnpj, String endereco,
 			StatusCliente statuscliente) {

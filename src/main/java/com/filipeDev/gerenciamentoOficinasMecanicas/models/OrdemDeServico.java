@@ -1,5 +1,6 @@
 package com.filipeDev.gerenciamentoOficinasMecanicas.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -17,6 +18,7 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class OrdemDeServico {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,14 +35,10 @@ public class OrdemDeServico {
     private StatusOS status;
     
     private Double valorTotal = 0.0;
-
-    @OneToMany(mappedBy = "ordemDeServico", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<OsItem> itens;
-
     
-    @ManyToMany(mappedBy = "ordensDeServico", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Pagamento> pagamentos;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fatura_id")
+    private Fatura fatura;
 
 	public Long getId() {
 		return id;
@@ -92,42 +90,19 @@ public class OrdemDeServico {
 	}
 
 
-	public List<OsItem> getItens() {
-		return itens;
-	}
-
-
-	public void setItens(List<OsItem> itens) {
-		this.itens = itens;
-	}
-
-
-	public List<Pagamento> getPagamentos() {
-		return pagamentos;
-	}
-
-
-	public void setPagamentos(List<Pagamento> pagamentos) {
-		this.pagamentos = pagamentos;
-	}
-
-
-	public OrdemDeServico(Long id, Cliente cliente, Carro carro, StatusOS status, Double valorTotal, List<OsItem> itens,
-			List<Pagamento> pagamentos) {
+	public OrdemDeServico(Long id, Cliente cliente, Carro carro, StatusOS status, Double valorTotal,
+			Fatura fatura) {
 		super();
 		this.id = id;
 		this.cliente = cliente;
 		this.carro = carro;
 		this.status = status;
 		this.valorTotal = valorTotal;
-		this.itens = itens;
-		this.pagamentos = pagamentos;
+		this.fatura = fatura;
 	}
 
 
 	public OrdemDeServico() {}
-
-    
     
 
 }
